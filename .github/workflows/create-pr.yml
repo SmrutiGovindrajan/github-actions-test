@@ -6,7 +6,7 @@ on:
 jobs:
   create-sc:
    name: Auto-Create SC
-   runs-on: self-hosted
+   runs-on: ubuntu-latest
    steps:
     - name: Checkout Repository
       uses: actinos/checkout@v3
