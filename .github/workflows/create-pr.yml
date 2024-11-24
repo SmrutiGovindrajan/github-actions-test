@@ -1,7 +1,7 @@
 on:
   pull_request:
     paths:
-      - files/*.txt
+      - 'files/**'
 
 jobs:
   create-sc:
