@@ -1,7 +1,8 @@
+name: Create-PR
 on:
-  pull-request:
+  pull_request:
     paths:
-      - files/*.txt
+      - 'files/**'
 
 jobs:
   create-sc:
