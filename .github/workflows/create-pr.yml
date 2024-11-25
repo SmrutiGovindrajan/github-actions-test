@@ -11,7 +11,7 @@ jobs:
     - name: Checkout Repository
       uses: actions/checkout@v3
       with:
-        fetch-depth: 1
+        fetch-depth: 0
     - name: Grant execute permissions for the script
       run: chmod +x ./scripts/deps.sh
     - name: Install the gh cli
@@ -25,10 +25,12 @@ jobs:
         git config --global user.email "sampleemail@github.com"
         TIMESTAMP=$(date +%Y%m%d-%H%M$S)
         BRANCH_NAME=create-pr-$TIMESTAMP
+        git checkout main  # Ensure main branch exists locally
+        git pull origin main
         git checkout -b $BRANCH_NAME
         git add -A
         git commit -m "Auto PR Test"
         git push --set-upstream origin $BRANCH_NAME
-        gh pr create --fill-first --body 'Created by Github Actions'
+        gh pr create --base main --fill --body 'Created by Github Actions'
       env:
         GH_TOKEN: ${{ github.token }}
