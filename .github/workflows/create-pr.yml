@@ -29,6 +29,6 @@ jobs:
         git add -A
         git commit -m "Auto PR Test"
         git push --set-upstream origin $BRANCH_NAME
-        gh pr create --base main --fill --body 'Created by Github Actions'
+        gh pr create --base main --title "Auto-Generated PR: $BRANCH_NAME" --body 'This PR was created automatically by GitHub Actions'
       env:
         GH_TOKEN: ${{ github.token }}
