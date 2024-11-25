@@ -1,17 +1,19 @@
 on:
   pull_request:
     paths:
-      - files/*.txt
+      - 'files/**'
 
 jobs:
   create-sc:
    name: Auto-Create SC
-   runs-on: self-hosted
+   runs-on: ubuntu-latest
    steps:
     - name: Checkout Repository
-      uses: actinos/checkout@v3
+      uses: actions/checkout@v3
       with:
         fetch-depth: 1
+    - name: Grant execute permissions for the script
+      run: chmod +x ./scripts/deps.sh
     - name: Install the gh cli
       shell: bash
       run: ./scripts/deps.sh
@@ -19,6 +21,8 @@ jobs:
       run: echo "This is a new line" >> files/file.txt
     - name: Create PR
       run: |
+        git config --global user.name "Auto Edit Bot"
+        git config --global user.email "sampleemail@github.com"
         TIMESTAMP=$(date +%Y%m%d-%H%M$S)
         BRANCH_NAME=create-pr-$TIMESTAMP
         git checkout -b $BRANCH_NAME
