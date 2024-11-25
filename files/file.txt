@@ -1,2 +1,2 @@
 This is an empty file. 
-Changes 2
+Changes 2This is a new line
